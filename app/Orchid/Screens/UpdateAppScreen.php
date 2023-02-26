@@ -3,6 +3,9 @@
 namespace App\Orchid\Screens;
 
 use App\Models\App;
+use Illuminate\Http\Request;
+use Orchid\Attachment\Models\Attachment;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Quill;
@@ -10,12 +13,41 @@ use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\SimpleMDE;
 use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Screen;
+use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
+use Orchid\Support\Facades\Toast;
 
 class UpdateAppScreen extends Screen
 {
 
     protected App $app;
+
+
+    public function update(Request $request, App $app)
+    {
+        $input = $request->input('app');
+
+        $app->fill($input);
+
+        if (isset($input['icon'])) {
+            $attach = Attachment::find($input['icon'][0]);
+            $icon_path = $attach->path . $attach->name . '.' . $attach->extension;
+            $app->icon = $icon_path;
+        
+        } else
+            $app->icon = 'static/dummy_icon.png';
+
+        $app->save();
+
+        // Toast::success('App saved successfully');
+    }
+
+    public function back(Request $request)
+    {
+        return redirect()->route('platform.app');
+    }
+
+
 
     /**
      * Fetch data to be displayed on the screen.
@@ -45,7 +77,14 @@ class UpdateAppScreen extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            Button::make('Save changes')
+                ->type(Color::DARK())
+                ->method('update', [$this->app]),
+            Button::make('Cancel')
+                ->type(Color::LIGHT())
+                ->method('back'),
+        ];
     }
 
     /**
@@ -103,7 +142,9 @@ class UpdateAppScreen extends Screen
                         ->help('The icon to be displayed in app details page and listings')
                         ->type('file')
                         ->maxFiles(1)
-                        ->value($this->app->attachment()->get())
+                        ->storage('public')
+                        ->multiple(false)
+                        ->value($this->app->icon)
                         ->required(),
                     Upload::make('app.screeshots')
                         ->title('Application Screenshots')
@@ -131,8 +172,16 @@ class UpdateAppScreen extends Screen
             ])
                 ->title('Application Properties')
                 ->description('Application info'),
-
-
+            Layout::rows([
+                Group::make([
+                    Button::make('Save changes')
+                        ->type(Color::DARK())
+                        ->method('update'),
+                    Button::make('Cancel')
+                        ->type(Color::LIGHT())
+                        ->method('back'),
+                ])->autoWidth()
+            ])
         ];
     }
 }

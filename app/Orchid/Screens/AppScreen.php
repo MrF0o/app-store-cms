@@ -4,6 +4,7 @@ namespace App\Orchid\Screens;
 
 use App\Models\App;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
@@ -71,7 +72,7 @@ class AppScreen extends Screen
             Layout::table('apps', [
                 TD::make('icon', 'Icon')->width('100px')
                     ->render(function ($app) {
-                        $html = '<img widht="100%" height="50px" src="' . asset('images/' . $app->icon) . '" >';
+                        $html = '<img widht="100%" height="50px" src="' . Storage::url($app->icon) . '" >';
 
                         return $html;
                     }),
