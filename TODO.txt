@@ -1,0 +1,43 @@
+for the user side of the application:
+- homepage:
+	- apps listing
+	- games listing
+	- categories for games and apps
+	- editor's choice (games & apps)
+
+- auth pages
+	- register page
+	- login page
+
+- app details page
+	- app/game title
+	- app/game icon
+	- app/game tags
+	- app/game screenshots
+	- app/game description
+	- app/game reviews
+
+- category page
+	- linked apps or games (based on the category)
+
+- search page
+	- search results
+
+- static pages
+	- ToS page
+	- contact Us
+	- privacy policies
+
+(all of this considering the ads!!!)
+
+
+
+
+for the adming panel:
+- dashboard Stats (users and published games and apps)
+- apps screen (CRUD)
+- games screen (CRUD)
+- pages screen (CRUD)
+- users screen (CRUD)
+- ads screen (CRUD)
+- controls: (basic accessibilily and UI control)
