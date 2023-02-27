@@ -18,7 +18,8 @@
                 <a href="#" class="side-app block hover:bg-gray-100/60 w-full p-2 rounded-md">
                     <div class="flex">
                         <div class="h-10 min-w-10 flex-shrink-0">
-                            <img class="h-full w-full rounded-md object-cover" src="https://cdn.ezjojoy.com/packages/com.tocaboca.tocalifeworld/icon_f2c9a5.png" alt>
+                            <img class="h-full w-full rounded-md object-cover"
+                                src="https://cdn.ezjojoy.com/packages/com.tocaboca.tocalifeworld/icon_f2c9a5.png" alt>
                         </div>
                         <div class="pl-2">
                             <h3 class="font-bold truncate">Toca Life World</h3>
@@ -29,7 +30,8 @@
                 <a href="#" class="app block hover:bg-gray-100 w-full p-2 rounded-md">
                     <div class="flex">
                         <div class="h-10 w-10 flex-shrink-0">
-                            <img class="h-full w-full rounded-md object-cover" src="https://cdn.ezjojoy.com/packages/com.innersloth.spacemafia/icon_cfbcd5.png" alt>
+                            <img class="h-full w-full rounded-md object-cover"
+                                src="https://cdn.ezjojoy.com/packages/com.innersloth.spacemafia/icon_cfbcd5.png" alt>
                         </div>
                         <div class="pl-2 truncate">
                             <h3 class="font-bold truncate">Among Us</h3>
@@ -53,7 +55,8 @@
                 <a href="#" class="app block hover:bg-gray-100 w-full p-2 rounded-md">
                     <div class="flex w-full">
                         <div class="h-10 min-w-10 flex-shrink-0">
-                            <img class="h-full min-w-10 rounded-md object-cover" src="https://cdn.ezjojoy.com/packages/com.playit.videoplayer/icon_fa91b1.png" alt>
+                            <img class="h-full min-w-10 rounded-md object-cover"
+                                src="https://cdn.ezjojoy.com/packages/com.playit.videoplayer/icon_fa91b1.png" alt>
                         </div>
                         <div class="pl-2 w-full truncate">
                             <h3 class="font-bold truncate">PLAYit</h3>
@@ -64,7 +67,8 @@
                 <a href="#" class="app block w-full hover:bg-gray-100 p-2 rounded-md">
                     <div class="flex">
                         <div class="h-10 w-10">
-                            <img class="h-full w-full rounded-md object-cover" src="https://cdn.ezjojoy.com/packages/com.plexapp.android/icon_2c08f7.png" alt>
+                            <img class="h-full w-full rounded-md object-cover"
+                                src="https://cdn.ezjojoy.com/packages/com.plexapp.android/icon_2c08f7.png" alt>
                         </div>
                         <div class="pl-2 truncate">
                             <h3 class="font-bold truncate">Plex</h3>
@@ -88,7 +92,8 @@
                 <a href="#" class="app block hover:bg-gray-100 w-full p-2 rounded-md">
                     <div class="flex">
                         <div class="h-10 w-10 flex-shrink-0">
-                            <img class="h-full w-full rounded-md object-cover" src="https://cdn.ezjojoy.com/packages/com.mojang.minecraftpe/icon_37987f.png" alt>
+                            <img class="h-full w-full rounded-md object-cover"
+                                src="https://cdn.ezjojoy.com/packages/com.mojang.minecraftpe/icon_37987f.png" alt>
                         </div>
                         <div class="pl-2 truncate">
                             <h3 class="font-bold truncate">Minecraft</h3>
@@ -108,8 +113,23 @@
             </div>
         </div>
         <div class="mt-2">
-            <div class="h-32 w-full bg-white text-center border rounded-lg">
-                No Categories for you
+            <div class="grid grid-cols-2 gap-1">
+                @foreach ($categories as $c)
+                    <div>
+                        <a href="#" class="app block hover:bg-gray-100 w-full p-2 rounded-md">
+                            <div class="flex">
+                                <div class="h-6 w-6 flex-shrink-0">
+                                    <img class="h-full w-full rounded-md"
+                                        src="{{ Storage::url($c->icon_path) }}"
+                                        alt>
+                                </div>
+                                <div class="pl-2 truncate">
+                                    <h3 class="truncate">{{ $c->name }}</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>

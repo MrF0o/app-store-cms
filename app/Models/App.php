@@ -21,6 +21,7 @@ class App extends Model
         'publisher',
         'publisher_url',
         'description',
+        'category_id',
     ];
 
 

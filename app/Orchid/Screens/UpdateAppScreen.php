@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens;
 
 use App\Models\App;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Orchid\Attachment\Models\Attachment;
 use Orchid\Screen\Actions\Button;
@@ -21,7 +22,7 @@ class UpdateAppScreen extends Screen
 {
 
     protected App $app;
-
+    public $categories_names;
 
     public function update(Request $request, App $app)
     {
@@ -34,11 +35,10 @@ class UpdateAppScreen extends Screen
             $icon_path = $attach->path . $attach->name . '.' . $attach->extension;
             $app->icon = $input['icon'][0];
             $app->icon_path = $icon_path;
-        
         } else
             $app->icon = 'static/dummy_icon.png';
 
-        $app->save();
+        $app->update();
 
         Toast::success('App saved successfully');
     }
@@ -58,7 +58,17 @@ class UpdateAppScreen extends Screen
     public function query(App $app): iterable
     {
         $this->app = $app;
-        return [];
+
+        $categories = Category::all();
+
+        $map_id = [];
+
+        foreach ($categories as $c)
+            $map_id[$c->id] = $c->name;
+
+        return [
+            'categories_names' => $map_id
+        ];
     }
 
     /**
@@ -107,6 +117,9 @@ class UpdateAppScreen extends Screen
                     ->title('App Short description')
                     ->max(255)
                     ->help('The featured description of the appilcation (max 255 characters)'),
+                Select::make('app.category_id')
+                    ->options($this->categories_names)
+                    ->isOptionList(),
                 Select::make('app.isapp')
                     ->options([
                         'app' => 'App',
