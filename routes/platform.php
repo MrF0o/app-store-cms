@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use App\Orchid\Screens\AppScreen;
+use App\Orchid\Screens\CategoryScreen;
+use App\Orchid\Screens\CategoryUpdateScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
 use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
@@ -98,6 +100,11 @@ Route::screen('example-editors', ExampleTextEditorsScreen::class)->name('platfor
 Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.example.cards');
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
 
+
+// -----------
+// | APPS
+// -----------
+
 Route::screen('app', AppScreen::class)
     ->name('platform.app')
     ->breadcrumbs(fn (Trail $trail) =>  $trail
@@ -110,3 +117,20 @@ Route::screen('app/update/{app?}', UpdateAppScreen::class)
         ->parent('platform.index')
         ->push('Apps', 'platform.app')
         ->push('Update App'));
+
+// -----------
+// | Categories
+// -----------
+
+Route::screen('category', CategoryScreen::class)
+    ->name('platform.category')
+    ->breadcrumbs(fn (Trail $trail) =>  $trail
+        ->parent('platform.index')
+        ->push('Categories'));
+
+Route::screen('category/edit/{category?}', CategoryUpdateScreen::class)
+    ->name('platform.category.update')
+    ->breadcrumbs(fn (Trail $trail) =>  $trail
+        ->parent('platform.index')
+        ->push('Categories', 'platform.category')
+        ->push('Edit Category'));

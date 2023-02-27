@@ -22,4 +22,10 @@ class App extends Model
         'publisher_url',
         'description',
     ];
+
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
