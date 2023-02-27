@@ -16,6 +16,10 @@ class App extends Model
         'name',
         'version',
         'icon',
-        'is_app'
+        'is_app',
+        'package_name',
+        'publisher',
+        'publisher_url',
+        'description',
     ];
 }

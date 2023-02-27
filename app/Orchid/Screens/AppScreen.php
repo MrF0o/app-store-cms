@@ -5,6 +5,7 @@ namespace App\Orchid\Screens;
 use App\Models\App;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Orchid\Attachment\Models\Attachment;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
@@ -12,6 +13,7 @@ use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Screen;
 use Orchid\Screen\TD;
 use Orchid\Support\Color;
@@ -72,7 +74,7 @@ class AppScreen extends Screen
             Layout::table('apps', [
                 TD::make('icon', 'Icon')->width('100px')
                     ->render(function ($app) {
-                        $html = '<img widht="100%" height="50px" src="' . Storage::url($app->icon) . '" >';
+                        $html = '<img widht="100%" height="50px" src="' . Storage::url($app->icon_path) . '" >';
 
                         return $html;
                     }),
@@ -100,11 +102,12 @@ class AppScreen extends Screen
                     ->title('Name')
                     ->placeholder('Enter The application name')
                     ->help('The name of the app to be created.'),
-                Input::make('app.icon')
+                Upload::make('app.icon')
                     ->type('file')
                     ->title('Icon')
                     ->placeholder('Select app Icon')
-                    ->help('The Icon of the app to be created. 1:1 aspect ratio'),
+                    ->help('The Icon of the app to be created. 1:1 aspect ratio')
+                    ->required(),
                 Select::make('app.isapp')
                     ->options([
                         'app' => 'App',
@@ -121,9 +124,15 @@ class AppScreen extends Screen
 
     public function create(Request $request)
     {
-        $app = new App($request->app);
-        $app->is_app = $request->app['isapp'] == 'app' ? true : false;
-        $app->icon = 'static/dummy_icon.png';
+        $input = $request->input('app');
+        $app = new App($input);
+        $app->is_app = $input['isapp'] == 'app' ? true : false;
+        $attach = Attachment::find($input['icon'][0]);
+        $icon_path = $attach->path . $attach->name . '.' . $attach->extension;
+        $app->icon = $input['icon'][0];
+        $app->icon_path = $icon_path;
         $app->save();
+
+        return redirect()->route('platform.app.update', $app->id);
     }
 }

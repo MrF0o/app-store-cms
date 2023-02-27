@@ -32,14 +32,15 @@ class UpdateAppScreen extends Screen
         if (isset($input['icon'])) {
             $attach = Attachment::find($input['icon'][0]);
             $icon_path = $attach->path . $attach->name . '.' . $attach->extension;
-            $app->icon = $icon_path;
+            $app->icon = $input['icon'][0];
+            $app->icon_path = $icon_path;
         
         } else
             $app->icon = 'static/dummy_icon.png';
 
         $app->save();
 
-        // Toast::success('App saved successfully');
+        Toast::success('App saved successfully');
     }
 
     public function back(Request $request)
