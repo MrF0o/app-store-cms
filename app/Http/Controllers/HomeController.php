@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $latest_games = App::where('is_app', false)->take(8)->get();
+        $latest_games = App::where('is_app', false)->take(16)->get();
 
         return view('pages.home', compact('latest_games'));
     }
