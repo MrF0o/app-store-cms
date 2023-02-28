@@ -133,7 +133,8 @@ class UpdateAppScreen extends Screen
                 Quill::make('app.description')
                     ->title('Application Description')
                     ->popover('Make sure to write an SEO optimal content to reach a wide audience.')
-                    ->value($this->app->description),
+                    ->value($this->app->description)
+                    ->toolbar(['text', 'color', 'quote', 'header', 'list', 'format', 'media']),
             ])->title('Basic Info'),
             Layout::block([
                 Layout::rows([

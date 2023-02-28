@@ -10,7 +10,7 @@
         </div>
         <div class="grid grid-cols-4 gap-2 p-1">
             @foreach ($latest_apps as $app)
-                <a href="#" class="app block hover:bg-gray-100 w-full p-2 rounded-md">
+                <a href="{{ route('app.details', [$app->slug, $app->id])  }}" class="app block hover:bg-gray-100 w-full p-2 rounded-md">
                     <div class="flex md:justify-start md:items-start justify-center items-center flex-col md:flex-row">
                         <div class="h-16 w-16 flex-shrink-0">
                             <img class="h-full w-full rounded"
@@ -41,7 +41,7 @@
         <div class="grid grid-cols-4 gap-2 p-1">
 
             @foreach ($latest_games as $game)
-                <a href="#" class="app block hover:bg-gray-100 w-full p-2 rounded-md">
+                <a href="{{ route('game.details', [$game->slug, $game->id])  }}" class="app block hover:bg-gray-100 w-full p-2 rounded-md">
                     <div class="flex md:justify-start md:items-start justify-center items-center flex-col md:flex-row">
                         <div class="h-16 w-16 flex-shrink-0">
                             <img class="h-full w-full rounded"

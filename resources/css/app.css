@@ -3,3 +3,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.app-description h1 {
+    @apply text-2xl font-semibold;
+}
+
+.app-description h2 {
+    @apply text-xl font-semibold;
+}
+
+.app-description a {
+    @apply underline hover:hover:text-blue-500;
+}
+
+.app-description blockquote {
+    @apply pl-5 py-2 my-2 border-l-4;
+}
+
+.ql-align-center {
+    @apply flex justify-center;
+}
