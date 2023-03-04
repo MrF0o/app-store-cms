@@ -12,9 +12,11 @@ use App\Orchid\Screens\Examples\ExampleFieldsScreen;
 use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
+use App\Orchid\Screens\FeaturedAppsScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
+use App\Orchid\Screens\TopPicksScreen;
 use App\Orchid\Screens\UpdateAppScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
@@ -117,6 +119,20 @@ Route::screen('app/update/{app?}', UpdateAppScreen::class)
         ->parent('platform.index')
         ->push('Apps', 'platform.app')
         ->push('Update App'));
+
+Route::screen('app/top-picks', TopPicksScreen::class)
+    ->name('platform.top-picks')
+    ->breadcrumbs(fn (Trail $trail) =>  $trail
+        ->parent('platform.index')
+        ->push('Apps', 'platform.app')
+        ->push('Top Picks'));
+
+Route::screen('app/featured', FeaturedAppsScreen::class)
+    ->name('platform.top-picks')
+    ->breadcrumbs(fn (Trail $trail) =>  $trail
+        ->parent('platform.index')
+        ->push('Apps', 'platform.app')
+        ->push('Featured Apps'));
 
 // -----------
 // | Categories

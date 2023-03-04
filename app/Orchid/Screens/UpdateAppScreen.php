@@ -12,6 +12,7 @@ use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Quill;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\SimpleMDE;
+use Orchid\Screen\Fields\Switcher;
 use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
@@ -130,6 +131,10 @@ class UpdateAppScreen extends Screen
                     ->value($this->app->is_app ? 'app' : 'game')
                     ->required()
                     ->disabled(),
+                Switcher::make('app.featured')
+                    ->sendTrueOrFalse()
+                    ->title('Feature App')
+                    ->help('add app to featured section, this will remove the first featured app'),
                 Quill::make('app.description')
                     ->title('Application Description')
                     ->popover('Make sure to write an SEO optimal content to reach a wide audience.')

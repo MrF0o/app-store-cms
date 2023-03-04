@@ -11,7 +11,7 @@
     
                 <div class="ml-5 w-full h-full flex flex-col">
                     <h1 class="text-2xl font-bold text-gray-700 ">{{ $app->name }}</h1>
-                    <p class="font-light text-sm whitespace-nowrap">{{ 'Published at ' . Carbon\Carbon::parse($app->created_at)->isoFormat('LL') }}</p>
+                    <p class="font-light text-sm whitespace-nowrap">{{ 'Published on ' . Carbon\Carbon::parse($app->created_at)->isoFormat('LL') }}</p>
                     <p class="font-light text-sm leading-6">Published by <a href="{{ $app->publisher_url ?? '#' }}" class="font-bold">{{ $app->publisher }}</a></p>
                 </div>
             </div>
