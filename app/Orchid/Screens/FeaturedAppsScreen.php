@@ -2,7 +2,16 @@
 
 namespace App\Orchid\Screens;
 
+use App\Models\App;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Screen;
+use Orchid\Screen\TD;
+use Orchid\Support\Color;
+use Orchid\Support\Facades\Layout;
+use Orchid\Support\Facades\Toast;
 
 class FeaturedAppsScreen extends Screen
 {
@@ -13,7 +22,9 @@ class FeaturedAppsScreen extends Screen
      */
     public function query(): iterable
     {
-        return [];
+        return [
+            'featured' => App::join('featured_apps', 'apps.id', '=', 'featured_apps.app_id')->paginate()
+        ];
     }
 
     /**
@@ -43,6 +54,37 @@ class FeaturedAppsScreen extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+            Layout::table('featured', [
+                TD::make('id', '#'),
+                TD::make('icon', 'Icon')->width('100px')
+                    ->render(function ($app) {
+                        $html = '<img widht="100%" height="50px" src="' . Storage::url($app->icon_path) . '" >';
+
+                        return $html;
+                    }),
+                TD::make('name', 'Name')
+                    ->width('100%'),
+                TD::make('Action')
+                    ->render(function ($app) {
+                        return Group::make(
+                            [
+                                Button::make('delete from featured')
+                                    ->method('delete', [$app->app_id])
+                                    ->type(Color::DANGER())
+                            ]
+                        )->autoWidth();
+                    }),
+            ]),
+        ];
+    }
+
+    public function delete($id)
+    {
+        DB::table('featured_apps')
+            ->where('app_id', $id)
+            ->delete();
+
+        Toast::info('app removed from featured');
     }
 }

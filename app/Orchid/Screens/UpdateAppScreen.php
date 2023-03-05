@@ -26,6 +26,8 @@ class UpdateAppScreen extends Screen
 
     protected App $app;
     public $categories_names;
+    public bool $is_app_featured;
+    public bool $is_app_in_top_picks;
 
     public function update(Request $request, App $app)
     {
@@ -45,6 +47,10 @@ class UpdateAppScreen extends Screen
 
         if ($input['feature']) {
             $this->featureApp($app->id);
+        }
+
+        if ($input['top']) {
+            $this->addAppToPicks($app->id);
         }
 
         Toast::success('App saved successfully');
@@ -84,6 +90,17 @@ class UpdateAppScreen extends Screen
         }
     }
 
+    public function addAppToPicks($id)
+    {
+        DB::table('top_picks')
+            ->where('app_id', $id)
+            ->delete();
+
+        DB::insert(
+            'INSERT INTO top_picks(app_id, created_at, updated_at) VALUES (?, ?, ?)',
+            [$id, Carbon::now(), Carbon::now()]
+        );
+    }
 
 
     /**
@@ -102,8 +119,13 @@ class UpdateAppScreen extends Screen
         foreach ($categories as $c)
             $map_id[$c->id] = $c->name;
 
+        $is_app_featured = DB::table('featured_apps')->where('app_id', $app->id)->first();
+        $is_app_in_top_picks = DB::table('top_picks')->where('app_id', $app->id)->first();
+
         return [
-            'categories_names' => $map_id
+            'categories_names' => $map_id,
+            'is_app_featured' => $is_app_featured != NULL,
+            'is_app_in_top_picks' => $is_app_in_top_picks != NULL,
         ];
     }
 
@@ -168,8 +190,14 @@ class UpdateAppScreen extends Screen
                     ->disabled(),
                 Switcher::make('app.feature')
                     ->sendTrueOrFalse()
+                    ->value($this->is_app_featured)
                     ->title('Feature App')
                     ->help('add app to featured section, this will remove the first featured app'),
+                Switcher::make('app.top')
+                    ->sendTrueOrFalse()
+                    ->value($this->is_app_in_top_picks)
+                    ->title('Add App to Top Picks')
+                    ->help('add app/game to top picks section'),
                 Quill::make('app.description')
                     ->title('Application Description')
                     ->popover('Make sure to write an SEO optimal content to reach a wide audience.')

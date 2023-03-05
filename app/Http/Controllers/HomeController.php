@@ -19,15 +19,25 @@ class HomeController extends Controller
         $latest_games->map(fn ($g) => $g->slug = Str::slug($g->name, '-'));
         $latest_apps->map(fn ($app) => $app->slug = Str::slug($app->name, '-'));
 
-        $featured_apps = DB::select('SELECT * FROM apps, featured_apps WHERE apps.id = featured_apps.app_id');
+        $featured_apps = DB::table('apps')
+            ->join('featured_apps', 'apps.id', '=', 'featured_apps.app_id')
+            ->limit(2)
+            ->get();
 
-        array_map(fn ($app) => $app->slug = Str::slug($app->name, '-'), $featured_apps);
+        $top_picks = DB::table('apps')
+            ->join('top_picks', 'apps.id', '=', 'top_picks.app_id')
+            ->limit(3)
+            ->get();
+
+        $top_picks->map(fn ($app) => $app->slug = Str::slug($app->name, '-'));
+        $featured_apps->map(fn ($app) => $app->slug = Str::slug($app->name, '-'));
 
         return view('pages.home', compact(
             'latest_games',
             'latest_apps',
             'categories',
-            'featured_apps'
+            'featured_apps',
+            'top_picks',
         ));
     }
 }

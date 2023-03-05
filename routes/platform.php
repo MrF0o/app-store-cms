@@ -128,7 +128,7 @@ Route::screen('app/top-picks', TopPicksScreen::class)
         ->push('Top Picks'));
 
 Route::screen('app/featured', FeaturedAppsScreen::class)
-    ->name('platform.top-picks')
+    ->name('platform.featured')
     ->breadcrumbs(fn (Trail $trail) =>  $trail
         ->parent('platform.index')
         ->push('Apps', 'platform.app')
