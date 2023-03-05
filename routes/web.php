@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +20,5 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/app/{slug?}/{app?}', [AppController::class, 'appDetails'])->name('app.details');
 Route::get('/game/{slug?}/{game?}', [AppController::class, 'gameDetails'])->name('game.details');
+Route::get('/category/{slug?}/{category?}', [CategoryController::class, 'index'])->name('category.index');
 
