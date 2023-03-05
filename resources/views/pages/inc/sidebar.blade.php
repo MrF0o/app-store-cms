@@ -24,7 +24,7 @@
                                     src="{{ Storage::url($app->icon_path) }}"
                                     alt>
                             </div>
-                            <div class="pl-2">
+                            <div class="pl-2 w-full truncate">
                                 <h3 class="font-bold truncate">{{ $app->name }}</h3>
                                 <p class="font-light text-xs truncate">{{ $app->publisher }}</p>
                             </div>

@@ -30,6 +30,7 @@ class PlatformProvider extends OrchidServiceProvider
         return [
             
             Menu::make('Dashboard')
+                // TODO: make a dashboard
                 ->route('platform.example'),
 
             Menu::make('Apps')
