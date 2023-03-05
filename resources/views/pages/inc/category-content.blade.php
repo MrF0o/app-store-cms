@@ -1,3 +1,33 @@
-@foreach ($apps as $app)
-    {{ $app->name }}
-@endforeach
+<div class="">
+    <div class="category-title flex items-center">
+        <img class="h-10 w-10 rounded-md"  src="{{ Storage::url($category->icon_path) }}" alt="">
+        <h4 class="font-bold text-xl mx-5">{{ $category->name }}</h4>
+    </div>
+    <div>
+
+        <div class="bg-white backdrop:blur-md rounded mt-5 shadow-md">
+            <div class="grid grid-cols-4 gap-2 p-1">
+                @foreach ($category->apps as $app)
+                    <a href="{{ route('app.details', [$app->slug, $app->id]) }}"
+                        class="app block hover:bg-gray-100 w-full p-2 rounded-md">
+                        <div
+                            class="flex md:justify-start md:items-start justify-center items-center flex-col md:flex-row">
+                            <div class="h-16 w-16 flex-shrink-0">
+                                <img class="h-full w-full rounded" src="{{ Storage::URL($app->icon_path) }}" alt>
+                            </div>
+                            <div class="md:pl-2 md:truncate text-center md:text-left">
+                                <h3
+                                    class="font-bold line-clamp-2 md:line-clamp-none md:block md:truncate leading-5 md:leading-7">
+                                    {{ $app->name }}
+                                </h3>
+                                <p class="font-light text-xs truncate hidden md:block">{{ $app->publisher }}</p>
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
+
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -109,7 +109,7 @@
             <div class="grid grid-cols-2 gap-1">
                 @foreach ($categories as $c)
                     <div>
-                        <a href="#" class="app block hover:bg-gray-100 w-full p-2 rounded-md">
+                        <a href="{{ route('category.index', [$c->slug, $c->id]) }}" class="app block hover:bg-gray-100 w-full p-2 rounded-md">
                             <div class="flex">
                                 <div class="h-6 w-6 flex-shrink-0">
                                     <img class="h-full w-full rounded-md" src="{{ Storage::url($c->icon_path) }}" alt>
