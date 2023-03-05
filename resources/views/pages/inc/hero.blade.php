@@ -1,6 +1,26 @@
 <div class="md:flex lg:mx-4">
 
-    <div class="w-full md:w-6/12 mr-2 rounded shadow-sm bg-white">
+    @foreach ($featured_apps as $app)
+        <div class="w-full md:w-6/12 mr-2 rounded shadow-sm bg-white">
+            <div class="w-full min-h-52 h-52">
+                <a href="#">No Banner Yet</a>
+            </div>
+            <a href="{{ route('app.details', [$app->slug, $app->app_id])  }}" class="p-2 flex">
+                <div class="h-16 w-16">
+                    <img class="h-full w-full rounded" src="{{ Storage::url($app->icon_path) }}" alt>
+                </div>
+
+                <div class="p-2">
+                    <h2 class="font-bold">{{ $app->name }}</h2>
+                    <p class="text-sm text-gray-600">Updated
+                        {{ \Carbon\Carbon::parse($app->updated_at)->diffForHumans() }}
+                    </p>
+                </div>
+            </a>
+        </div>
+    @endforeach
+
+    {{-- <div class="w-full md:w-6/12 mr-2 rounded shadow-sm bg-white">
         <div class="w-full max-h-52">
             <img class="rounded-t h-52 w-full object-cover" src="https://i.ytimg.com/vi/eVyeFIaFHT8/maxresdefault.jpg" alt>
         </div>
@@ -29,6 +49,6 @@
                 <p class="text-sm text-gray-600">Updated on Sun Dec 04 2022</p>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 </div>

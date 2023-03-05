@@ -4,7 +4,9 @@ namespace App\Orchid\Screens;
 
 use App\Models\App;
 use App\Models\Category;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Orchid\Attachment\Models\Attachment;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\Group;
@@ -41,12 +43,45 @@ class UpdateAppScreen extends Screen
 
         $app->update();
 
+        if ($input['feature']) {
+            $this->featureApp($app->id);
+        }
+
         Toast::success('App saved successfully');
     }
 
     public function back(Request $request)
     {
         return redirect()->route('platform.app');
+    }
+
+    public function featureApp($id)
+    {
+
+        DB::table('featured_apps')
+            ->where('app_id', $id)
+            ->delete();
+
+        $featured_arr = DB::select('SELECT * FROM featured_apps');
+
+        if ((sizeof($featured_arr) >= 2)) {
+
+            $first_featured = DB::table('featured_apps')->orderBy('id')->first();
+
+            DB::table('featured_apps')
+                ->where('id', $first_featured->id)
+                ->delete();
+
+            DB::insert(
+                'INSERT INTO featured_apps(app_id, created_at, updated_at) VALUES (?, ?, ?)',
+                [$id, Carbon::now(), Carbon::now()]
+            );
+        } else {
+            DB::insert(
+                'INSERT INTO featured_apps(app_id, created_at, updated_at) VALUES (?, ?, ?)',
+                [$id, Carbon::now(), Carbon::now()]
+            );
+        }
     }
 
 
@@ -131,7 +166,7 @@ class UpdateAppScreen extends Screen
                     ->value($this->app->is_app ? 'app' : 'game')
                     ->required()
                     ->disabled(),
-                Switcher::make('app.featured')
+                Switcher::make('app.feature')
                     ->sendTrueOrFalse()
                     ->title('Feature App')
                     ->help('add app to featured section, this will remove the first featured app'),
