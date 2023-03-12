@@ -14,7 +14,6 @@ class HomeController extends Controller
     {
         $latest_games = App::where('is_app', false)->orderBy('id', 'DESC')->take(16)->get();
         $latest_apps = App::where('is_app', true)->orderBy('id', 'DESC')->take(16)->get();
-        $categories = Category::take(12)->get()->shuffle();
         $featured_apps = DB::table('apps')
             ->join('featured_apps', 'apps.id', '=', 'featured_apps.app_id')
             ->limit(2)

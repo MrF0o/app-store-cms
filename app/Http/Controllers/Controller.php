@@ -19,7 +19,6 @@ class Controller extends BaseController
     {
         $categories = Category::take(12)->get()->shuffle();
 
-
         $top_picks = DB::table('apps')
             ->join('top_picks', 'apps.id', '=', 'top_picks.app_id')
             ->limit(3)

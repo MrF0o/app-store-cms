@@ -5,7 +5,11 @@ module.exports = {
     './resources/**/*.js',
   ],
   theme: {
-    extend: {},
+    extend: {
+      transitionProperty: {
+        'width': 'width'
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/line-clamp'),

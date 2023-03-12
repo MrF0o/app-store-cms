@@ -4,6 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
+.search-popup {
+    @apply fixed left-[50%] top-[-500px] w-0 h-0 opacity-0 transition-all duration-100 bg-gray-700/10 backdrop-blur-md z-50;
+}
+
+.search-open {
+    @apply block h-screen w-full top-0 left-0 opacity-100;
+}
 
 .app-description h1 {
     @apply text-2xl font-semibold;
@@ -14,7 +21,7 @@
 }
 
 .app-description a {
-    @apply underline hover:hover:text-blue-500;
+    @apply underline hover:text-blue-500;
 }
 
 .app-description blockquote {
