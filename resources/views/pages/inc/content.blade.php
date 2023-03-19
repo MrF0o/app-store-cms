@@ -4,7 +4,7 @@
         <div class="p-4">
             <h4 class="capitalize font-bold text-lg">latest apps</h4>
             <div>
-                <a class="text-xs hover:text-blue-500" href="#">see all apps <i
+                <a class="text-xs hover:text-blue-500" href="{{ route('app.all') }}">see all apps <i
                         class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
@@ -34,7 +34,7 @@
         <div class="p-4">
             <h4 class="capitalize font-bold text-lg">latest games</h4>
             <div>
-                <a class="text-xs hover:text-blue-500" href="#">see all games <i
+                <a class="text-xs hover:text-blue-500" href="{{ route('app.all') }}">see all games <i
                         class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
