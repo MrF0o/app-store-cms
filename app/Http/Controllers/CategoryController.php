@@ -11,7 +11,9 @@ class CategoryController extends Controller
 {
     public function index(String $slug, Category $category)
     {
+        $apps = $category->apps()->simplePaginate(28);
+        $apps->setCollection($this->mapSlugArray($apps->items()));
 
-        return view('pages.category', compact('category'), $this->sidebarData());
+        return view('pages.category', compact('category', 'apps'), $this->sidebarData());
     }
 }

@@ -17,7 +17,7 @@
             <div>
 
                 @foreach ($top_picks as $app)
-                    <a href="{{ route('app.details', [$app->slug, $app->app_id]) }}" class="side-app block hover:bg-gray-100/60 w-full p-2 rounded-md">
+                    <a href="{{ $app->is_app ? route('app.details', [$app->slug, $app->id]) :  route('game.details', [$app->slug, $app->id])}}" class="side-app block hover:bg-gray-100/60 w-full p-2 rounded-md">
                         <div class="flex">
                             <div class="h-10 min-w-10 flex-shrink-0">
                                 <img class="h-full w-full rounded-md object-cover"

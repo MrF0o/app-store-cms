@@ -1,7 +1,6 @@
 <div class="">
     <div class="category-title flex items-center">
-        <img class="h-10 w-10 rounded-md"  src="{{ Storage::url($category->icon_path) }}" alt="">
-        <h4 class="font-bold text-xl mx-5">{{ $category->name }}</h4>
+        <h4 class="font-bold text-xl">{{ $title }}</h4>
     </div>
     <div>
 

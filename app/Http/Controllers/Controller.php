@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\App;
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -31,5 +34,29 @@ class Controller extends BaseController
             'categories' => $categories,
             'top_picks' => $top_picks
         ];
+    }
+
+    public function mapSlug($model)
+    {
+        $model->slug = Str::slug($model->name, '-');
+
+        return $model;
+    }
+
+    public function mapSlugCollection(Collection $coll)
+    {
+        return $coll->map(fn ($g) => $g->slug = Str::slug($g->name, '-'));
+    }
+
+    public function mapSlugArray(array $arr)
+    {
+        // dd($arr);
+        $coll = collect($arr);
+        
+        foreach ($coll as $item) {
+            $item->slug = Str::slug($item->name, '-');
+        }
+
+        return $coll;
     }
 }

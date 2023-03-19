@@ -37,13 +37,13 @@
                     </a>
                 </li>
                 <li class="mx-5">
-                    <a class="hover:text-blue-500" href="#">
+                    <a class="hover:text-blue-500" href="{{ route('app.all') }}">
                         <span><i class="fa-solid fa-mobile-screen-button"></i></span>
                         <span>Apps</span>
                     </a>
                 </li>
                 <li>
-                    <a class="hover:text-blue-500" href="#">
+                    <a class="hover:text-blue-500" href="{{ route('game.all') }}">
                         <span><i class="fa-solid fa-gamepad"></i></span>
                         <span>Games</span>
                     </a>

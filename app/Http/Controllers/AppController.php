@@ -18,16 +18,24 @@ class AppController extends Controller
 
     public function gameDetails(String $slug, App $game)
     {
-        $categories = Category::take(12)->get()->shuffle();
         $app = $game;
 
-        $top_picks = DB::table('apps')
-            ->join('top_picks', 'apps.id', '=', 'top_picks.app_id')
-            ->limit(3)
-            ->get();
+        return view('pages.app', compact('app'), $this->sidebarData());
+    }
 
-        $top_picks->map(fn ($app) => $app->slug = Str::slug($app->name, '-'));
+    public function allApps() {
+        $apps = App::where('is_app', true)->simplePaginate(28);
+        $apps->setCollection($this->mapSlugArray($apps->items()));
+        $title = 'All Apps';
 
-        return view('pages.app', compact('categories', 'app', 'top_picks'));
+        return view('pages.generic-all', compact('title', 'apps'), $this->sidebarData());
+    }
+
+    public function allGames() {
+        $apps = App::where('is_app', false)->simplePaginate(28);
+        $apps->setCollection($this->mapSlugArray($apps->items()));
+        $title = 'All Games';
+
+        return view('pages.generic-all', compact('title', 'apps'), $this->sidebarData());
     }
 }

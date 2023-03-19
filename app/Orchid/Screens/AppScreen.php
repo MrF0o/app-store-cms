@@ -18,6 +18,7 @@ use Orchid\Screen\Screen;
 use Orchid\Screen\TD;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
+use Orchid\Support\Facades\Toast;
 
 class AppScreen extends Screen
 {
@@ -86,13 +87,13 @@ class AppScreen extends Screen
                                 ->list([
                                     Button::make('Update')
                                         ->type(Color::LINK())
+                                        ->method('goToUpdatePage', [$app->id])
                                         ->padding(23),
-                                    Link::make('Delete')
+                                    Button::make('Delete')
+                                        ->method('delete', [$app->id])
                                         ->type(Color::DANGER()),
                                 ])
                                 ->icon('options-vertical'),
-                            Button::make('Publish')
-                                ->type(Color::PRIMARY()),
                         ]);
                     }),
             ]),
@@ -134,5 +135,15 @@ class AppScreen extends Screen
         $app->save();
 
         return redirect()->route('platform.app.update', $app->id);
+    }
+
+    public function delete($id) {
+        $app = App::find($id);
+        Toast::info("App $app->name deleted successfully.");
+        $app->delete();
+    }
+
+    public function goToUpdatePage($id) {
+        return redirect()->route('platform.app.update', $id);
     }
 }
