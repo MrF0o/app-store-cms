@@ -12,6 +12,8 @@ class AppController extends Controller
 {
     public function appDetails(String $slug, App $app)
     {
+        $app->visits_count++;
+        $app->save();
 
         return view('pages.app', compact('app'), $this->sidebarData());
     }
@@ -19,6 +21,10 @@ class AppController extends Controller
     public function gameDetails(String $slug, App $game)
     {
         $app = $game;
+
+        $app->visits_count++;
+        $app->save();
+
 
         return view('pages.app', compact('app'), $this->sidebarData());
     }
