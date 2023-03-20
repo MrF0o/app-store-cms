@@ -42,6 +42,8 @@ class PlatformProvider extends OrchidServiceProvider
                         ->route('platform.featured'),
                     Menu::make('Top picks')
                         ->route('platform.top-picks'),
+                    Menu::make('Editor\'s Choice')
+                        ->route('platform.editors-choice'),
                 ]),
 
             Menu::make('Pages')

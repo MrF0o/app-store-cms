@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Orchid\Screens\AppScreen;
 use App\Orchid\Screens\CategoryScreen;
 use App\Orchid\Screens\CategoryUpdateScreen;
+use App\Orchid\Screens\EditorChoiceScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
 use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
@@ -133,6 +134,13 @@ Route::screen('app/featured', FeaturedAppsScreen::class)
         ->parent('platform.index')
         ->push('Apps', 'platform.app')
         ->push('Featured Apps'));
+
+Route::screen('app/editors-choice', EditorChoiceScreen::class)
+    ->name('platform.editors-choice')
+    ->breadcrumbs(fn (Trail $trail) =>  $trail
+        ->parent('platform.index')
+        ->push('Apps', 'platform.app')
+        ->push('Editor\'s Choice'));
 
 // -----------
 // | Categories
