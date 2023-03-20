@@ -28,7 +28,7 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
-            
+
             Menu::make('Dashboard')
                 // TODO: make a dashboard
                 ->route('platform.example'),
@@ -42,6 +42,18 @@ class PlatformProvider extends OrchidServiceProvider
                         ->route('platform.featured'),
                     Menu::make('Top picks')
                         ->route('platform.top-picks'),
+                ]),
+
+            Menu::make('Pages')
+                ->icon('folder'),
+            Menu::make('Settings')
+                ->icon('settings')
+                ->list([
+                    Menu::make('General'),
+                    Menu::make('Appearance'),
+                    Menu::make('SEO'),
+                    Menu::make('Ads'),
+                    Menu::make('Social')
                 ]),
 
             Menu::make('Documentation')
