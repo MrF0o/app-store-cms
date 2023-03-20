@@ -34,7 +34,7 @@
         <div class="p-4">
             <h4 class="capitalize font-bold text-lg">latest games</h4>
             <div>
-                <a class="text-xs hover:text-blue-500" href="{{ route('app.all') }}">see all games <i
+                <a class="text-xs hover:text-blue-500" href="{{ route('game.all') }}">see all games <i
                         class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
@@ -68,6 +68,27 @@
                 <a class="text-xs hover:text-blue-500" href="#">see all <i
                         class="fa-solid fa-arrow-right"></i></a>
             </div>
+        </div>
+        <div class="grid grid-cols-4 gap-2 p-1">
+
+            @foreach ($editors_choice as $choice)
+                <a href="{{ route('game.details', [$choice->slug, $choice->id])  }}" class="app block hover:bg-gray-100 w-full p-2 rounded-md">
+                    <div class="flex md:justify-start md:items-start justify-center items-center flex-col md:flex-row">
+                        <div class="h-16 w-16 flex-shrink-0">
+                            <img class="h-full w-full rounded"
+                                src="{{Storage::URL($choice->icon_path)}}" alt>
+                        </div>
+                        <div class="md:pl-2 md:truncate text-center md:text-left">
+                            <h3
+                                class="font-bold line-clamp-2 md:line-clamp-none md:block md:truncate leading-5 md:leading-7">
+                                {{$choice->name}}
+                            </h3>
+                            <p class="font-light text-xs truncate hidden md:block">{{$choice->publisher}}</p>
+                        </div>
+                    </div>
+                </a>
+            @endforeach
+
         </div>
     </section>
 

@@ -89,6 +89,10 @@ class AppScreen extends Screen
                                         ->type(Color::LINK())
                                         ->method('goToUpdatePage', [$app->id])
                                         ->padding(23),
+                                    Button::make('Add to Editor\'s choice')
+                                        ->type(Color::LINK())
+                                        ->method('AddToEditorsChoice', [$app->id])
+                                        ->padding(23),
                                     Button::make('Delete')
                                         ->method('delete', [$app->id])
                                         ->type(Color::DANGER()),
@@ -141,6 +145,13 @@ class AppScreen extends Screen
         $app = App::find($id);
         Toast::info("App $app->name deleted successfully.");
         $app->delete();
+    }
+
+    public function AddToEditorsChoice($id) {
+        $app = App::find($id);
+        $app->is_chosen_by_editor = true;
+        $app->save();
+        Toast::success("$app->name Added to Editor's choice successfully.");
     }
 
     public function goToUpdatePage($id) {
