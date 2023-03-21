@@ -14,6 +14,6 @@ class CategoryController extends Controller
         $apps = $category->apps()->simplePaginate(28);
         $apps->setCollection($this->mapSlugArray($apps->items()));
 
-        return view('pages.category', compact('category', 'apps'), $this->sidebarData());
+        return view('pages.category', compact('category', 'apps'), $this->commonData());
     }
 }

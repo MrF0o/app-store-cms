@@ -3,6 +3,7 @@
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,4 +24,5 @@ Route::get('/game/{slug?}/{game?}', [AppController::class, 'gameDetails'])->name
 Route::get('/category/{slug?}/{category?}', [CategoryController::class, 'index'])->name('category.index');
 Route::get('/apps/all', [AppController::class, 'allApps'])->name('app.all');
 Route::get('/games/all', [AppController::class, 'allGames'])->name('game.all');
+Route::get('/{slug?}/{page?}', [PageController::class, 'index'])->name('page.static');
 

@@ -15,7 +15,7 @@ class AppController extends Controller
         $app->visits_count++;
         $app->save();
 
-        return view('pages.app', compact('app'), $this->sidebarData());
+        return view('pages.app', compact('app'), $this->commonData());
     }
 
     public function gameDetails(String $slug, App $game)
@@ -26,7 +26,7 @@ class AppController extends Controller
         $app->save();
 
 
-        return view('pages.app', compact('app'), $this->sidebarData());
+        return view('pages.app', compact('app'), $this->commonData());
     }
 
     public function allApps() {
@@ -34,7 +34,7 @@ class AppController extends Controller
         $apps->setCollection($this->mapSlugArray($apps->items()));
         $title = 'All Apps';
 
-        return view('pages.generic-all', compact('title', 'apps'), $this->sidebarData());
+        return view('pages.generic-all', compact('title', 'apps'), $this->commonData());
     }
 
     public function allGames() {
@@ -42,6 +42,6 @@ class AppController extends Controller
         $apps->setCollection($this->mapSlugArray($apps->items()));
         $title = 'All Games';
 
-        return view('pages.generic-all', compact('title', 'apps'), $this->sidebarData());
+        return view('pages.generic-all', compact('title', 'apps'), $this->commonData());
     }
 }

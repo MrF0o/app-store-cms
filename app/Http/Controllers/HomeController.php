@@ -30,6 +30,6 @@ class HomeController extends Controller
             'latest_apps',
             'featured_apps',
             'editors_choice'
-        ), $this->sidebarData());
+        ), $this->commonData());
     }
 }

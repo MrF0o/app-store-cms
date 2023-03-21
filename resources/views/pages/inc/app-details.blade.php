@@ -45,7 +45,7 @@
 
         <h1 class="font-bold pb-5">More about {{ $app->name }}</h1>
 
-        <div class="app-description">
+        <div class="wysiwyg">
             {!! $app->description !!}
         </div>
     </div>
