@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\App;
 use App\Models\Category;
+use App\Models\Page;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -36,6 +37,20 @@ class Controller extends BaseController
         ];
     }
 
+    public function footerData()
+    {
+        $pages = Page::take(5)->get();
+        $pages->map(fn ($page) => $page->slug = Str::slug($page->title, '-'));
+        return [
+            'pages' => $pages
+        ];
+    }
+
+    public function commonData()
+    {
+        return array_merge($this->footerData(), $this->sidebarData());
+    }
+
     public function mapSlug($model)
     {
         $model->slug = Str::slug($model->name, '-');
@@ -52,7 +67,7 @@ class Controller extends BaseController
     {
         // dd($arr);
         $coll = collect($arr);
-        
+
         foreach ($coll as $item) {
             $item->slug = Str::slug($item->name, '-');
         }

@@ -14,11 +14,13 @@ use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\FeaturedAppsScreen;
+use App\Orchid\Screens\PageScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\TopPicksScreen;
 use App\Orchid\Screens\UpdateAppScreen;
+use App\Orchid\Screens\UpdatePageScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
@@ -158,3 +160,20 @@ Route::screen('category/edit/{category?}', CategoryUpdateScreen::class)
         ->parent('platform.index')
         ->push('Categories', 'platform.category')
         ->push('Edit Category'));
+
+// -----------
+// | Pages
+// -----------
+
+Route::screen('page', PageScreen::class)
+    ->name('platform.page')
+    ->breadcrumbs(fn (Trail $trail) =>  $trail
+        ->parent('platform.index')
+        ->push('Pages'));
+
+Route::screen('page/update/{page?}', UpdatePageScreen::class)
+    ->name('platform.page.update')
+    ->breadcrumbs(fn (Trail $trail) =>  $trail
+        ->parent('platform.index')
+        ->push('Pages', 'platform.page')
+        ->push('Update Page'));

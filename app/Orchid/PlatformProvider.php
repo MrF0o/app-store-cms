@@ -47,6 +47,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ]),
 
             Menu::make('Pages')
+                ->route('platform.page')
                 ->icon('folder'),
             Menu::make('Settings')
                 ->icon('settings')
