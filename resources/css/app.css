@@ -31,3 +31,7 @@
 .ql-align-center {
     @apply flex justify-center;
 }
+
+.shown {
+    @apply block h-fit mx-4 mt-20 bg-white rounded-lg shadow-lg p-5;
+}

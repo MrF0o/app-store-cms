@@ -14,6 +14,8 @@ class SearchController extends Controller
             $apps = App::where('name', 'like', "%$query_string%" )->simplePaginate()->withQueryString();
             $apps->setCollection($this->mapSlugArray($apps->items()));
             return view('pages.search', compact('query_string', 'apps'), $this->commonData());
+        } else {
+            return redirect()->route('home');
         }
     }
 
