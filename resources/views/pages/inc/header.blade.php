@@ -64,9 +64,10 @@
 </header>
 <div class="search-popup">
     <div class="flex justify-center items-center w-full h-full inner-search-container">
-        <div class="md:w-[50%] w-[80%] flex">
-            <input placeholder="Search..." type="text" class="text-xl px-7 py-6 w-full rounded-3xl bg-slate-50 border border-gray-300 focus:outline-2 focus:border-none outline-gray-500">
+        <form class="md:w-[50%] w-[80%] flex" method="POST" action="{{ route('search.query') }}">
+            @csrf
+            <input name="search" placeholder="Search..." type="text" class="text-xl px-7 py-6 w-full rounded-3xl bg-slate-50 border border-gray-300 focus:outline-2 focus:border-none outline-gray-500">
             <button class="px-7 py-6 rounded-3xl ml-2 bg-blue-500 text-white text-xl hover:bg-blue-400 ">Search</button>
-        </div>
+        </form>
     </div>
 </div>
