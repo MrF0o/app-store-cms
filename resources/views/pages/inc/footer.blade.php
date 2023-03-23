@@ -28,21 +28,14 @@
             <div>
                 <ul class="list-disc">
                     <h4 class="font-bold leading-loose text-gray-700">Categories</h4>
-                    <li class="text-sm"><a class="hover:text-blue-500" href="#">Art & Design</a></li>
-                    <li class="text-sm"><a class="hover:text-blue-500" href="#">Beauty</a></li>
-                    <li class="text-sm"><a class="hover:text-blue-500" href="#">Business</a></li>
-                    <li class="text-sm"><a class="hover:text-blue-500" href="#">Comics</a></li>
-                    <li class="text-sm"><a class="hover:text-blue-500" href="#">Communication</a></li>
-                    <li class="text-sm"><a class="hover:text-blue-500" href="#">Education</a></li>
-                    <li class="text-sm"><a class="hover:text-blue-500" href="#">Action</a></li>
-                    <li class="text-sm"><a class="hover:text-blue-500" href="#">Adventure</a></li>
-                    <li class="text-sm"><a class="hover:text-blue-500" href="#">Arcade</a></li>
-                    <li class="text-sm"><a class="hover:text-blue-500" href="#">Educational</a></li>
+                    @foreach ($categories as $category)
+                        <li class="text-sm"><a class="hover:text-blue-500" href="{{ route('category.index', [$category->slug, $category->id]) }}">{{ $category->name }}</a></li>
+                    @endforeach
                 </ul>
             </div>
         </div>
     </div>
     <div class="mt-10">
-        <span class="font-semibold text-gray-600 p-3 text-xs md:text-sm">Copyright AppStoreCMS &#169; - all rights reserved 2023</span>
+        <span class="font-semibold text-gray-600 p-3 text-xs md:text-sm">Copyright <a href="/">{{ env('APP_NAME') }}</a> &#169; - all rights reserved 2023</span>
     </div>
 </footer>
