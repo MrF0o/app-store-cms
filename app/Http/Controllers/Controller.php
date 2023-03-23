@@ -21,7 +21,7 @@ class Controller extends BaseController
 
     public function sidebarData()
     {
-        $categories = Category::take(12)->get()->shuffle();
+        $categories = Category::take(24)->get()->shuffle();
 
         $top_picks = DB::table('apps')
             ->join('top_picks', 'apps.id', '=', 'top_picks.app_id')

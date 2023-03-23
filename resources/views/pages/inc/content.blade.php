@@ -10,18 +10,18 @@
         </div>
         <div class="grid grid-cols-4 gap-2 p-1">
             @foreach ($latest_apps as $app)
-                <a href="{{ route('app.details', [$app->slug, $app->id])  }}" class="app block hover:bg-gray-100 w-full p-2 rounded-md">
+                <a href="{{ route('app.details', [$app->slug, $app->id]) }}"
+                    class="app block hover:bg-gray-100 w-full p-2 rounded-md">
                     <div class="flex md:justify-start md:items-start justify-center items-center flex-col md:flex-row">
                         <div class="h-16 w-16 flex-shrink-0">
-                            <img class="h-full w-full rounded"
-                                src="{{Storage::URL($app->icon_path)}}" alt>
+                            <img class="h-full w-full rounded" src="{{ Storage::URL($app->icon_path) }}" alt>
                         </div>
                         <div class="md:pl-2 md:truncate text-center md:text-left">
                             <h3
                                 class="font-bold line-clamp-2 md:line-clamp-none md:block md:truncate leading-5 md:leading-7">
-                                {{$app->name}}
+                                {{ $app->name }}
                             </h3>
-                            <p class="font-light text-xs truncate hidden md:block">{{$app->publisher}}</p>
+                            <p class="font-light text-xs truncate hidden md:block">{{ $app->publisher }}</p>
                         </div>
                     </div>
                 </a>
@@ -41,18 +41,18 @@
         <div class="grid grid-cols-4 gap-2 p-1">
 
             @foreach ($latest_games as $game)
-                <a href="{{ route('game.details', [$game->slug, $game->id])  }}" class="app block hover:bg-gray-100 w-full p-2 rounded-md">
+                <a href="{{ route('game.details', [$game->slug, $game->id]) }}"
+                    class="app block hover:bg-gray-100 w-full p-2 rounded-md">
                     <div class="flex md:justify-start md:items-start justify-center items-center flex-col md:flex-row">
                         <div class="h-16 w-16 flex-shrink-0">
-                            <img class="h-full w-full rounded"
-                                src="{{Storage::URL($game->icon_path)}}" alt>
+                            <img class="h-full w-full rounded" src="{{ Storage::URL($game->icon_path) }}" alt>
                         </div>
                         <div class="md:pl-2 md:truncate text-center md:text-left">
                             <h3
                                 class="font-bold line-clamp-2 md:line-clamp-none md:block md:truncate leading-5 md:leading-7">
-                                {{$game->name}}
+                                {{ $game->name }}
                             </h3>
-                            <p class="font-light text-xs truncate hidden md:block">{{$game->publisher}}</p>
+                            <p class="font-light text-xs truncate hidden md:block">{{ $game->publisher }}</p>
                         </div>
                     </div>
                 </a>
@@ -72,22 +72,52 @@
         <div class="grid grid-cols-4 gap-2 p-1">
 
             @foreach ($editors_choice as $choice)
-                <a href="{{ route('game.details', [$choice->slug, $choice->id])  }}" class="app block hover:bg-gray-100 w-full p-2 rounded-md">
+                <a href="{{ route('game.details', [$choice->slug, $choice->id]) }}"
+                    class="app block hover:bg-gray-100 w-full p-2 rounded-md">
                     <div class="flex md:justify-start md:items-start justify-center items-center flex-col md:flex-row">
                         <div class="h-16 w-16 flex-shrink-0">
-                            <img class="h-full w-full rounded"
-                                src="{{Storage::URL($choice->icon_path)}}" alt>
+                            <img class="h-full w-full rounded" src="{{ Storage::URL($choice->icon_path) }}" alt>
                         </div>
                         <div class="md:pl-2 md:truncate text-center md:text-left">
                             <h3
                                 class="font-bold line-clamp-2 md:line-clamp-none md:block md:truncate leading-5 md:leading-7">
-                                {{$choice->name}}
+                                {{ $choice->name }}
                             </h3>
-                            <p class="font-light text-xs truncate hidden md:block">{{$choice->publisher}}</p>
+                            <p class="font-light text-xs truncate hidden md:block">{{ $choice->publisher }}</p>
                         </div>
                     </div>
                 </a>
             @endforeach
+
+        </div>
+    </section>
+    <section class="bg-white backdrop:blur-md rounded mt-5 shadow-md md:hidden">
+        <div class="p-4">
+            <h4 class="capitalize font-bold text-lg">categories</h4>
+            <div>
+                <a class="text-xs hover:text-blue-500" href="#">see all categories<i
+                        class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2 p-1">
+
+
+                @foreach ($categories as $c)
+                    <div>
+                        <a href="{{ route('category.index', [$c->slug, $c->id]) }}"
+                            class="app block hover:bg-gray-100 w-full p-2 rounded-md">
+                            <div class="flex">
+                                <div class="h-6 w-6 flex-shrink-0">
+                                    <img class="h-full w-full rounded-md" src="{{ Storage::url($c->icon_path) }}" alt>
+                                </div>
+                                <div class="pl-2 truncate">
+                                    <h3 class="truncate">{{ $c->name }}</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+
 
         </div>
     </section>

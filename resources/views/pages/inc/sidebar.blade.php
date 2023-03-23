@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    <div class="side-section p-2">
+    {{-- <div class="side-section p-2">
         <div class="xl:flex justify-between items-center">
             <h4 class="font-bold text-lg">Top Apps</h4>
             <div>
@@ -96,7 +96,7 @@
                 </a>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="side-section p-2">
         <div class="xl:flex justify-between items-center">
             <h4 class="font-bold text-lg">Categories</h4>

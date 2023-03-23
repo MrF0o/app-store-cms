@@ -3,7 +3,9 @@
     @foreach ($featured_apps as $app)
         <div class="w-full md:w-6/12 {{ $loop->index == 0 ? 'mr-2' : '' }} {{ $loop->index != 0 ? 'mt-2 md:mt-0' : 'mt-0' }} rounded shadow-sm bg-white">
             <div class="w-full min-h-52 h-52">
-                <a href="#">No Banner Yet</a>
+                <a href="{{ route('app.details', [$app->slug, $app->app_id])  }}">
+                    <img class="rounded-t w-full h-full object-cover" src="{{ Storage::url($app->cover_path) }}" alt="{{ $app->name }} cover - featured media">
+                </a>
             </div>
             <a href="{{ route('app.details', [$app->slug, $app->app_id])  }}" class="p-2 flex">
                 <div class="h-16 w-16">

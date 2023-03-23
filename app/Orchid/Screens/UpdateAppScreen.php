@@ -42,15 +42,30 @@ class UpdateAppScreen extends Screen
             $app->icon_path = $icon_path;
         } else
             $app->icon = 'static/dummy_icon.png';
+        
+        if (isset($input['cover'])) {
+            $attach = Attachment::find($input['cover'])->first();
+            $cover_path = $attach->path . $attach->name . '.' . $attach->extension;
+            $app->cover = $input['cover'][0];
+            $app->cover_path = $cover_path;
+        }
 
         $app->update();
 
         if ($input['feature']) {
-            $this->featureApp($app->id);
+            if ($app->cover_path) {
+                $this->featureApp($app->id);
+            } else {
+                Toast::error('please add a cover image before adding app to featured');
+            }
+        } else {
+            // TODO : unfeature
         }
 
         if ($input['top']) {
             $this->addAppToPicks($app->id);
+        } else {
+            // un top
         }
 
         Toast::success('App saved successfully');
@@ -191,8 +206,9 @@ class UpdateAppScreen extends Screen
                 Switcher::make('app.feature')
                     ->sendTrueOrFalse()
                     ->value($this->is_app_featured)
+                    ->disabled($this->app->cover_path == NULL)
                     ->title('Feature App')
-                    ->help('add app to featured section, this will remove the first featured app'),
+                    ->help('add app to featured section, this will remove the first featured app' . ($this->app->cover_path ? '' : '(app must have a cover photo to be featured)')),
                 Switcher::make('app.top')
                     ->sendTrueOrFalse()
                     ->value($this->is_app_in_top_picks)
@@ -229,11 +245,14 @@ class UpdateAppScreen extends Screen
                         ->multiple(false)
                         ->value($this->app->icon)
                         ->required(),
-                    Upload::make('app.screeshots')
-                        ->title('Application Screenshots')
-                        ->help('The screenshots to be displayed in app details page')
+                    Upload::make('app.cover')
+                        ->title('Application Cover Image')
+                        ->help('Media type that\'s displayed is applicaton display')
                         ->type('file')
-                        ->media(),
+                        ->maxFiles(1)
+                        ->storage('public')
+                        ->multiple(false)
+                        ->value($this->app->cover),
                 ])
             ])
                 ->title('Media (images)')
@@ -255,6 +274,16 @@ class UpdateAppScreen extends Screen
             ])
                 ->title('Application Properties')
                 ->description('Application info'),
+            Layout::block([
+                Layout::rows([
+                    Input::make('app.download_url')
+                        ->title('Download URL')
+                        ->value($this->app->download_url)
+                        ->help('The url where the application is hosted'),
+                ])
+            ])
+                ->title('Download Area')
+                ->description('Download sources info'),
             Layout::rows([
                 Group::make([
                     Button::make('Save changes')

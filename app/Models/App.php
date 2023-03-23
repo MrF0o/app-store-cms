@@ -22,7 +22,8 @@ class App extends Model
         'publisher_url',
         'description',
         'category_id',
-        'is_chosen_by_editor'
+        'is_chosen_by_editor',
+        'download_url'
     ];
 
 
