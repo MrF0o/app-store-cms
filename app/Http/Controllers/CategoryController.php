@@ -16,4 +16,11 @@ class CategoryController extends Controller
 
         return view('pages.category', compact('category', 'apps'), $this->commonData());
     }
+
+    public function all()
+    {
+        $cats = Category::simplePaginate(10);
+        $cats->map(fn ($c) => $c->slug = Str::slug($c->name, '-'));
+        return view('pages.categories', compact('cats') , $this->commonData());
+    }
 }

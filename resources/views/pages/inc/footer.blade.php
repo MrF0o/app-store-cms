@@ -19,9 +19,6 @@
                     @foreach ($pages as $page)
                         <li class="text-sm"><a class="hover:text-blue-500" href="{{ route('page.static', [$page->slug, $page->id]) }}"> {{$page->title}} </a></li>
                     @endforeach
-                    <li class="text-sm"><a class="hover:text-blue-500" href="#">Terms of service</a></li>
-                    <li class="text-sm"><a class="hover:text-blue-500" href="#">Privacy Policy</a></li>
-                    <li class="text-sm"><a class="hover:text-blue-500" href="#">contact Us</a></li>
                 </ul>
             </div>
 

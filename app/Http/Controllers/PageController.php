@@ -9,6 +9,6 @@ class PageController extends Controller
 {
     public function index(string $slug, Page $page)
     {
-        return view('pages.static', compact('page'), $this->footerData());
+        return view('pages.static', compact('page'), $this->commonData());
     }
 }

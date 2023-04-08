@@ -30,3 +30,4 @@ Route::get('/{slug}/{page}', [PageController::class, 'index'])->name('page.stati
 Route::post('search', [SearchController::class, 'result'])->name('search.query');
 Route::get('search', [SearchController::class, 'index'])->name('search.results');
 
+Route::get('/categories', [CategoryController::class, 'all'])->name('category.all');

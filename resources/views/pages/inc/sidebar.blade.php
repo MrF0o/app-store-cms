@@ -101,7 +101,7 @@
         <div class="xl:flex justify-between items-center">
             <h4 class="font-bold text-lg">Categories</h4>
             <div>
-                <a class="text-xs hover:text-blue-500" href="#">see all Categories <i
+                <a class="text-xs hover:text-blue-500" href="{{ route('category.all') }}">see all Categories <i
                         class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
