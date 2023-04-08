@@ -31,3 +31,4 @@ Route::post('search', [SearchController::class, 'result'])->name('search.query')
 Route::get('search', [SearchController::class, 'index'])->name('search.results');
 
 Route::get('/categories', [CategoryController::class, 'all'])->name('category.all');
+Route::get('/top-picks', [AppController::class, 'topPicks'])->name('toppicks.all');

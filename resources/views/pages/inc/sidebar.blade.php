@@ -4,7 +4,7 @@
         <div class="xl:flex justify-between items-center">
             <h4 class="font-bold text-lg">Top picks</h4>
             <div>
-                <a class="text-xs hover:text-blue-500" href="#">see all top Picks <i
+                <a class="text-xs hover:text-blue-500" href="{{route('toppicks.all')}}">see all top Picks <i
                         class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
