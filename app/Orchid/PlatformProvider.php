@@ -52,11 +52,12 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Settings')
                 ->icon('settings')
                 ->list([
-                    Menu::make('General'),
-                    Menu::make('Appearance'),
-                    Menu::make('SEO'),
-                    Menu::make('Ads'),
+                    Menu::make('General')
+                        ->route('platform.settings.general'),
+                    Menu::make('Ads')
+                        ->route('platform.settings.ads'),
                     Menu::make('Social')
+                        ->route('platform.settings.social'),
                 ]),
 
             Menu::make('Documentation')

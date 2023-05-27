@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Orchid\Screens\AdsScreen;
 use App\Orchid\Screens\AppScreen;
 use App\Orchid\Screens\CategoryScreen;
 use App\Orchid\Screens\CategoryUpdateScreen;
@@ -14,6 +15,7 @@ use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\FeaturedAppsScreen;
+use App\Orchid\Screens\GeneralScreen;
 use App\Orchid\Screens\PageScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
@@ -177,3 +179,27 @@ Route::screen('page/update/{page?}', UpdatePageScreen::class)
         ->parent('platform.index')
         ->push('Pages', 'platform.page')
         ->push('Update Page'));
+
+// -----------
+// | Settings
+// -----------
+Route::screen('settings/ads', AdsScreen::class)
+->name('platform.settings.ads')
+    ->breadcrumbs(fn (Trail $trail) =>  $trail
+        ->parent('platform.index')
+        ->push('Settings')
+        ->push('Advertisements'));
+
+Route::screen('settings/general', GeneralScreen::class)
+->name('platform.settings.general')
+    ->breadcrumbs(fn (Trail $trail) =>  $trail
+        ->parent('platform.index')
+        ->push('Settings')
+        ->push('General'));
+
+Route::screen('settings/social', AdsScreen::class)
+->name('platform.settings.social')
+    ->breadcrumbs(fn (Trail $trail) =>  $trail
+        ->parent('platform.index')
+        ->push('Settings')
+        ->push('Social Links'));
